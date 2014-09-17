@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="squareAlgVisualisation" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Release/squareAlgVisualisation" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="engine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="engine.h" />
+		<Unit filename="engine/camera.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="engine/camera.h" />
+		<Unit filename="engine/glm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="engine/glm.h" />
+		<Unit filename="engine/linearAlg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="engine/linearAlg.h" />
+		<Unit filename="engine/polygon.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="engine/polygon.h" />
+		<Unit filename="engine/scene.h" />
+		<Unit filename="engine/shaders.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="engine/shaders.h" />
+		<Unit filename="engine/skybox.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="engine/skybox.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="square_alg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="square_alg.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

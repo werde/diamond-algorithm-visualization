@@ -1,0 +1,71 @@
+# depslib dependency file v1.0
+1410984294 source:d:\sf\codeblocks13\projects\squarealgvisualisation\main.c
+	"square_alg.h"
+	"engine.h"
+
+1410982287 d:\sf\codeblocks13\projects\squarealgvisualisation\square_alg.h
+	<stdio.h>
+	<stdlib.h>
+
+1410982409 source:d:\sf\codeblocks13\projects\squarealgvisualisation\square_alg.c
+	"square_alg.h"
+
+1410984371 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine.c
+	"engine.h"
+
+1410985260 d:\sf\codeblocks13\projects\squarealgvisualisation\engine.h
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<SOIL.h>
+	<GL/glew.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+	"./engine/glm.h"
+	"./engine/linearAlg.h"
+	"./engine/shaders.h"
+	"./engine/camera.h"
+	"./engine/polygon.h"
+
+1405375927 d:\sf\codeblocks13\projects\squarealgvisualisation\engine\glm.h
+	<GL/glut.h>
+
+1403519528 d:\sf\codeblocks13\projects\squarealgvisualisation\engine\linearalg.h
+	<math.h>
+
+1410953127 d:\sf\codeblocks13\projects\squarealgvisualisation\engine\shaders.h
+	"../engine.h"
+
+1410872822 d:\sf\codeblocks13\projects\squarealgvisualisation\engine\camera.h
+	"../engine.h"
+
+1404047422 d:\sf\codeblocks13\projects\squarealgvisualisation\engine\skybox.h
+	"../engine.h"
+
+1403530409 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine\camera.c
+	"camera.h"
+
+1405372752 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine\glm.c
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	"glm.h"
+
+1403519542 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine\linearalg.c
+	"linearAlg.h"
+
+1410959972 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine\shaders.c
+	"shaders.h"
+
+1404060883 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine\skybox.c
+	"skybox.h"
+
+1410953709 d:\sf\codeblocks13\projects\squarealgvisualisation\engine\polygon.h
+	"../engine.h"
+
+1410957865 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine\polygon.c
+	"polygon.h"
+

@@ -1,0 +1,88 @@
+#include "engine.h"
+#define VERTEX_SHADER "./engine/shaders/SimpleTransform.vertexshader"
+#define FRAGMENT_SHADER "./engine/shaders/SingleColor.fragmentshader"
+
+GLuint MatrixID, programID, vertexbuffer, uvbuffer;
+mat4 projection, view, modelMat, MVP;
+struct _TPolygon** polyArray;
+GLuint texture, TextureID;
+
+	static const GLfloat g_uv_buffer_data[] = {
+		 0.0f, 0.0f,
+		 1.0f, 0.0f,
+		 1.0f,  1.0f,
+    };
+
+GLvoid init(float** vd_array, int size){
+    int i, k;
+    int polyCount = 2*(size-1)*(size-1);
+    cameraInit();
+
+    polyArray = malloc(polyCount*sizeof(struct _TPolygon*));
+
+    loadTexture("./res/img_jpg/grass_tex.jpg", &texture);
+
+    for (i = 0; i < polyCount; i++) {
+        polyArray[i]=tpolygon_init(vd_array[i], g_uv_buffer_data, &texture);
+    }
+
+    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+    glDisable(GL_DEPTH_TEST);
+    programID = LoadShaders(VERTEX_SHADER, FRAGMENT_SHADER);
+    MatrixID = glGetUniformLocation(programID, "MVP");
+
+    //set up matrices
+    projection = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 1000.0f);
+    view = lookAt(Camera.pos, Camera.focus);
+    modelMat = IDENTITY_MATRIX;
+    mat4 temp = multiplymat4(&modelMat, &view);
+    MVP = multiplymat4(&temp, &projection);
+};
+GLvoid display(GLvoid){
+    int i, polyCount;
+    polyCount = 2*(SQUARE_SIZE - 1)*(SQUARE_SIZE - 1);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glUseProgram(programID);
+    updateMVP();
+
+    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
+
+    for (i = 0; i < polyCount; i++) {
+        //printf("drawing poly %d\n", i);
+        tpolygon_draw(polyArray[i]);
+    }
+
+    glutSwapBuffers();
+};
+
+GLvoid updateMVP() {
+    //projection = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 1000.0f);
+
+    GLfloat pitch, yaw;
+    int x, y;
+    x = mouse_x;
+    y = mouse_y;
+    yaw = 0.004f * (GLfloat) (x - 400);
+    pitch = 0.004f * (GLfloat) (300 - y);
+    cameraRotate(yaw, pitch);
+    glutWarpPointer(400, 300);
+
+	view = lookAt(Camera.pos, Camera.focus);
+	//model = IDENTITY_MATRIX;
+
+	mat4 temp = multiplymat4(&modelMat, &view);
+    MVP = multiplymat4(&temp, &projection);
+}
+
+GLvoid loadTexture(char* path, GLuint* texture){
+    printf("\n loading texture: %s\n", path);
+
+    *texture = SOIL_load_OGL_texture(path, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+    if( 0 == *texture )
+    {
+        printf( "SOIL loading error: '%s'\n", SOIL_last_result() );
+    }
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+}
