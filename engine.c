@@ -5,7 +5,7 @@
 GLuint MatrixID, programID, vertexbuffer, uvbuffer;
 mat4 projection, view, modelMat, MVP;
 struct _TPolygon** polyArray;
-GLuint texture, TextureID;
+GLuint texture1, texture2, texture3, TextureID;
 
 	static const GLfloat g_uv_buffer_data[] = {
 		 0.0f, 0.0f,
@@ -15,19 +15,30 @@ GLuint texture, TextureID;
 
 GLvoid init(float** vd_array, int size){
     int i, k;
+    float av_poly_height;
     int polyCount = 2*(size-1)*(size-1);
     cameraInit();
 
     polyArray = malloc(polyCount*sizeof(struct _TPolygon*));
 
-    loadTexture("./res/img_jpg/grass_tex.jpg", &texture);
+    loadTexture("./res/img_jpg/grass_tex.jpg", &texture1);
+    loadTexture("./res/img_jpg/snow_tex.jpg", &texture2);
+    loadTexture("./res/img_jpg/water_tex.jpg", &texture3);
 
     for (i = 0; i < polyCount; i++) {
-        polyArray[i]=tpolygon_init(vd_array[i], g_uv_buffer_data, &texture);
+        av_poly_height = (vd_array[i][2] + vd_array[i][5] + vd_array[i][8])/3;
+        printf("avpolyhe %f", av_poly_height);
+        if (av_poly_height > 12) {
+            polyArray[i]=tpolygon_init(vd_array[i], g_uv_buffer_data, &texture2);
+        } else if (av_poly_height > 11) {
+            polyArray[i]=tpolygon_init(vd_array[i], g_uv_buffer_data, &texture1);
+        } else {
+            polyArray[i]=tpolygon_init(vd_array[i], g_uv_buffer_data, &texture3);
+        }
     }
 
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
     programID = LoadShaders(VERTEX_SHADER, FRAGMENT_SHADER);
     MatrixID = glGetUniformLocation(programID, "MVP");
 

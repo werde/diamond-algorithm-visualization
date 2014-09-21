@@ -86,17 +86,17 @@ float** fill_vd_array(int size, int* hei) {
     //converting heights to float array of heights
     for (k = 0; k < size; k++){
         for (l = 0; l < size; l++){
-            arr[k][l] = (float)(*(hei + l + size*k))/25.0;
+            arr[k][l] = (float)(*(hei + l + size*k))/10.0;
             //printf(" %d ",*(hei + k + size*l));
         }
-        printf("\n");
+        //printf("\n");
     }
 
     for (k = 0; k < size; k++){
         for (l =0; l < size; l++){
-            printf(" %f ",arr[k][l]);
+            //printf(" %f ",arr[k][l]);
         }
-        printf("\n");
+        //printf("\n");
     }
 
 

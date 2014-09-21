@@ -2,7 +2,7 @@
 
 void generateHeights(int side, int *heights){
     srand(time(NULL));
-    int hei[side][side], x, y, size;
+    int hei[side][side], x, y, size, k;
 
     for (x = 0; x < side; x++) {
         for (y = 0; y < side; y++){
@@ -12,19 +12,17 @@ void generateHeights(int side, int *heights){
 
     hei[0][0] = 100;
     hei[0][side-1] = 100;
-    hei[side-1][0] = 200;
-    hei[side-1][side-1] = 200;
-    size = side;
-
-    size -=1;
-
+    hei[side-1][0] = 100;
+    hei[side-1][side-1] = 110;
+    size = side - 1;
+    k = size;
     while (size>=2) {
         //printf("size %d\n", size);
         //diamond_step();
-        x =0;y=0;
+        x =0; y=0; k=side/(size+1);
         while (y != (side - 1)){
             while (x != (side - 1)) {
-                hei[x + size/2][y + size/2] = (hei[x][y]+hei[x + size][y]+hei[x][y + size]+hei[x + size][y + size] + rand_to_char())/5;
+                hei[x + size/2][y + size/2] = (hei[x][y]+hei[x + size][y]+hei[x][y + size]+hei[x + size][y + size] + (rand_to_char()*0) )/4;
                 //printf("x : %d, y : %d, cx : %d, cy : %d\n", x, y, (x + size/2), (x + size/2));
                 x += size;
             }
@@ -95,7 +93,7 @@ unsigned char rand_to_char(){
     result = (unsigned char)(255.0 * ((float)rand())/(float)RAND_MAX);
     r2 = (unsigned char)(255.0 * ((float)rand())/(float)RAND_MAX);;
 
-    //printf("\n%d %d", result, r2);
+    //printf("\n rand %d %d", result, r2);
 
     return r2;
 }
