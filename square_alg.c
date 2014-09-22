@@ -10,10 +10,10 @@ void generateHeights(int side, int *heights){
         }
     }
 
-    hei[0][0] = 100;
-    hei[0][side-1] = 100;
-    hei[side-1][0] = 100;
-    hei[side-1][side-1] = 110;
+    hei[0][0] = 0;
+    hei[0][side-1] = 0;
+    hei[side-1][0] = 0;
+    hei[side-1][side-1] = 0;
     size = side - 1;
     k = size;
     while (size>=2) {

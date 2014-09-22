@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1411057720 source:d:\sf\codeblocks13\projects\squarealgvisualisation\main.c
+1411297698 source:d:\sf\codeblocks13\projects\squarealgvisualisation\main.c
 	"square_alg.h"
 	"engine.h"
 
@@ -7,7 +7,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1411057305 source:d:\sf\codeblocks13\projects\squarealgvisualisation\square_alg.c
+1411297829 source:d:\sf\codeblocks13\projects\squarealgvisualisation\square_alg.c
 	"square_alg.h"
 
 1411032184 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine.c
@@ -43,7 +43,7 @@
 1404047422 d:\sf\codeblocks13\projects\squarealgvisualisation\engine\skybox.h
 	"../engine.h"
 
-1403530409 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine\camera.c
+1411297786 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine\camera.c
 	"camera.h"
 
 1405372752 source:d:\sf\codeblocks13\projects\squarealgvisualisation\engine\glm.c

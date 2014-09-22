@@ -3,8 +3,8 @@
 GLvoid cameraInit(){
     Camera.pitch = 0;
     Camera.yaw = 0;
-    vec4 pos = {{4, 3, 3, 0}};
-	vec4 focus = {{-4, -3, -3, 0}};
+    vec4 pos = {{0, 0.5, 0, 0}};
+	vec4 focus = {{1, 0, -1, 0}};
     normalizevec4(&focus);
 	Camera.pos = pos;
     Camera.focus = focus;

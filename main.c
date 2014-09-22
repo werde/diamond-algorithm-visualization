@@ -118,24 +118,24 @@ float** fill_vd_array(int size, int* hei) {
         vd_array[i] = malloc(sizeof(float [9]));
         if ((i%2) == 0) {
             vd_array[i][0] = (float)x;
-            vd_array[i][1] = (float)y + 1;
-            vd_array[i][2] = (float)arr[x][y+1];
+            vd_array[i][2] = (float)y + 1;
+            vd_array[i][1] = (float)arr[x][y+1];
             vd_array[i][3] = (float)x;
-            vd_array[i][4] = (float)y;
-            vd_array[i][5] = (float)arr[x][y];
+            vd_array[i][5] = (float)y;
+            vd_array[i][4] = (float)arr[x][y];
             vd_array[i][6] = (float)x + 1;
-            vd_array[i][7] = (float)y;
-            vd_array[i][8] = (float)arr[x+1][y];
+            vd_array[i][8] = (float)y;
+            vd_array[i][7] = (float)arr[x+1][y];
         } else {
             vd_array[i][0] = (float)x + 1;
-            vd_array[i][1] = (float)y;
-            vd_array[i][2] = (float)arr[x+1][y];
+            vd_array[i][2] = (float)y;
+            vd_array[i][1] = (float)arr[x+1][y];
             vd_array[i][3] = (float)x + 1;
-            vd_array[i][4] = (float)y + 1;
-            vd_array[i][5] = (float)arr[x+1][y+1];
+            vd_array[i][5] = (float)y + 1;
+            vd_array[i][4] = (float)arr[x+1][y+1];
             vd_array[i][6] = (float)x;
-            vd_array[i][7] = (float)y + 1;
-            vd_array[i][8] = (float)arr[x][y+1];
+            vd_array[i][8] = (float)y + 1;
+            vd_array[i][7] = (float)arr[x][y+1];
         }
     }
     printf(" 1 x %f y %f bigN %f \n", vd_array[0][0], vd_array[0][1], vd_array[0][2]);
