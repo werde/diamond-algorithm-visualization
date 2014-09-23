@@ -5,7 +5,6 @@
 GLuint MatrixID, programID, vertexbuffer, uvbuffer;
 mat4 projection, view, modelMat, MVP;
 struct _TPolygon** polyArray;
-GLuint texture1, texture2, texture3, TextureID;
 
 	static const GLfloat g_uv_buffer_data[] = {
 		 0.0f, 0.0f,
@@ -13,7 +12,7 @@ GLuint texture1, texture2, texture3, TextureID;
 		 1.0f,  1.0f,
     };
 
-GLvoid init(float** vd_array, int size){
+GLvoid init(float** vd_array, float* terrain_vd_array, int size){
     int i, k;
     float av_poly_height;
     int polyCount = 2*(size-1)*(size-1);
@@ -24,18 +23,19 @@ GLvoid init(float** vd_array, int size){
     loadTexture("./res/img_jpg/grass_tex.jpg", &texture1);
     loadTexture("./res/img_jpg/snow_tex.jpg", &texture2);
     loadTexture("./res/img_jpg/water_tex.jpg", &texture3);
-
+/*
     for (i = 0; i < polyCount; i++) {
         av_poly_height = (vd_array[i][2] + vd_array[i][5] + vd_array[i][8])/3;
-        printf("avpolyhe %f", av_poly_height);
-        if (av_poly_height > 12) {
+        //printf("avpolyhe %f", av_poly_height);
+        if (av_poly_height > 0) {
             polyArray[i]=tpolygon_init(vd_array[i], g_uv_buffer_data, &texture2);
         } else if (av_poly_height > 11) {
             polyArray[i]=tpolygon_init(vd_array[i], g_uv_buffer_data, &texture1);
         } else {
             polyArray[i]=tpolygon_init(vd_array[i], g_uv_buffer_data, &texture3);
         }
-    }
+    }*/
+    terrain = tterrain_init(terrain_vd_array, g_uv_buffer_data, &texture1);
 
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
     glEnable(GL_DEPTH_TEST);
@@ -57,12 +57,13 @@ GLvoid display(GLvoid){
     updateMVP();
 
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
-
+/*
     for (i = 0; i < polyCount; i++) {
         //printf("drawing poly %d\n", i);
         tpolygon_draw(polyArray[i]);
     }
-
+*/
+    tterrain_draw(terrain);
     glutSwapBuffers();
 };
 
@@ -94,6 +95,9 @@ GLvoid loadTexture(char* path, GLuint* texture){
         printf( "SOIL loading error: '%s'\n", SOIL_last_result() );
     }
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glGenerateMipmap(GL_TEXTURE_2D);
 }
