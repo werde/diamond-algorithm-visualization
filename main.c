@@ -39,6 +39,7 @@ int main(int argc, char** argv){
 
     generateHeights(size, hei);
     float** vd_array;
+    printf(" filling terrain array\n");
     vd_array = fill_vd_array(size, hei);
 
     //printf("2 x %f y %f bigN %f \n", vd_array[0][2], vd_array[2][2], vd_array[4][2]);

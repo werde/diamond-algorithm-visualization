@@ -39,6 +39,8 @@ vec4 mulmatvec4(const mat4* m, const vec4* v);
 void normalizevec4(vec4* v);
 float dotvec4(vec4 v1, vec4 v2);
 vec4 crossvec4(vec4 v1, vec4 v2);
+vec4 substractvec4(vec4 v1, vec4 v2);
+vec4 addvec4(vec4 v1, vec4 v2);
 void rotateX(const mat4* m, float angle);
 void rotateY(const mat4* m, float angle);
 void rotateZ(const mat4* m, float angle);

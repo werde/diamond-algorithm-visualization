@@ -52,6 +52,25 @@ vec4 crossvec4(vec4 v1, vec4 v2) {
 	out.m[2] = v1.m[0]*v2.m[1] - v1.m[1]*v2.m[0];
 	return out;
 }
+
+vec4 substractvec4(vec4 v1, vec4 v2){
+    int i=0;
+    vec4 out = {{0}};
+    for (i=0;i<4;i++){
+        out.m[i] = v1.m[i] - v2.m[i];
+    }
+    return out;
+};
+
+vec4 addvec4(vec4 v1, vec4 v2){
+    int i=0;
+    vec4 out = {{0}};
+    for (i=0;i<4;i++){
+        out.m[i] = v1.m[i] + v2.m[i];
+    }
+    return out;
+};
+
 void rotateX(const mat4* m, float angle) {
 	mat4 rotation = IDENTITY_MATRIX;
 	mat4 temp;

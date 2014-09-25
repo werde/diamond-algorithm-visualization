@@ -3,6 +3,7 @@
 #define FRAGMENT_SHADER "./engine/shaders/SingleColor.fragmentshader"
 
 GLuint MatrixID, programID, vertexbuffer, uvbuffer;
+GLuint ViewMatrixID, ModelMatrixID, CameraPosID;
 mat4 projection, view, modelMat, MVP;
 struct _TPolygon** polyArray;
 
@@ -36,11 +37,14 @@ GLvoid init(float** vd_array, float* terrain_vd_array, int size){
         }
     }*/
     terrain = tterrain_init(terrain_vd_array, g_uv_buffer_data, &texture1);
-
+    printf("initialized terrain\n");
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
     glEnable(GL_DEPTH_TEST);
     programID = LoadShaders(VERTEX_SHADER, FRAGMENT_SHADER);
     MatrixID = glGetUniformLocation(programID, "MVP");
+	ViewMatrixID = glGetUniformLocation(programID, "V");
+	ModelMatrixID = glGetUniformLocation(programID, "M");
+	CameraPosID = glGetUniformLocation(programID, "CameraPos");
 
     //set up matrices
     projection = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 1000.0f);
@@ -57,6 +61,10 @@ GLvoid display(GLvoid){
     updateMVP();
 
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
+    glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &(modelMat.m[0]));
+    glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &(view.m[0]));
+    glUniform3f(CameraPosID, Camera.pos.m[0], Camera.pos.m[1], Camera.pos.m[2]);
+
 /*
     for (i = 0; i < polyCount; i++) {
         //printf("drawing poly %d\n", i);
@@ -87,7 +95,7 @@ GLvoid updateMVP() {
 }
 
 GLvoid loadTexture(char* path, GLuint* texture){
-    printf("\n loading texture: %s\n", path);
+
 
     *texture = SOIL_load_OGL_texture(path, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
     if( 0 == *texture )
@@ -100,4 +108,5 @@ GLvoid loadTexture(char* path, GLuint* texture){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glGenerateMipmap(GL_TEXTURE_2D);
+    printf(" loaded texture: %s\n", path);
 }

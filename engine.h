@@ -1,6 +1,6 @@
 #ifndef ENGINE_H_INCLUDED
 #define ENGINE_H_INCLUDED
-#define SQUARE_SIZE 513
+#define SQUARE_SIZE 129
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
